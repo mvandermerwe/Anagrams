@@ -8,7 +8,7 @@ import java.util.Comparator;
 /**
  * 
  * 
- * @author markvandermerwe and
+ * @author markvandermerwe and Thomas Oh
  *
  */
 public class AnagramUtil {

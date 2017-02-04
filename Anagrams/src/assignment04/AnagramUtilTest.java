@@ -10,7 +10,7 @@ import org.junit.Test;
 /**
  * Test class for our AnagramUtil functionality.
  * 
- * @author markvandermerwe and
+ * @author markvandermerwe and Thomas Oh
  *
  */
 public class AnagramUtilTest {

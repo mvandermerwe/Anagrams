@@ -6,7 +6,7 @@ package assignment04;
 /**
  * Main class for setting up and running our anagram algorithm.
  * 
- * @author markvandermerwe and
+ * @author markvandermerwe and Thomas Oh
  *
  */
 public class Main {
