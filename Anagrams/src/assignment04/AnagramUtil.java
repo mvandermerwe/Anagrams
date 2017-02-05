@@ -16,22 +16,35 @@ public class AnagramUtil {
 	// This method returns the sorted version of the input string. The
 	// sorting must be accomplished using an insertion sort.
 	public static String sort(String nameToBeChanged) {
-		//Use insertionSort w/ array of chars.
+		// Use insertionSort w/ array of chars.
 
-		//Placeholder.
+		// Placeholder.
 		return "";
 	}
 
-	// This generic method sorts the input array using an insertion sort and
-	// the input Comparator object.
+	/**
+	 * This generic method sorts the input array using an insertion sort and the
+	 * input Comparator object.
+	 * 
+	 * @param arrayToSort
+	 *            - array of T to sort using the comparator.
+	 * @param comparator
+	 *            - custom comparator for type T (and subclasses) to order
+	 *            values.
+	 */
 	public static <T> void insertionSort(T[] arrayToSort, Comparator<? super T> comparator) {
-		for(int index = 1; index < arrayToSort.length; index++){
+		// Go through each position.
+		for (int index = 1; index < arrayToSort.length; index++) {
+			// Store positions of indices to be modified later.
 			int index1 = index;
-			int index2 = index1 -1;
-			while(index1 != 0 && comparator.compare(arrayToSort[index1], arrayToSort[index2])!=0){
+			int index2 = index1 - 1;
+			// If the value is less than the one before it (in whatever way determined), switch places.
+			while (index1 != 0 && comparator.compare(arrayToSort[index1], arrayToSort[index2]) < 0) {
+				// Switch values in index and its predecessor
 				T first = arrayToSort[index2];
 				arrayToSort[index2] = arrayToSort[index1];
 				arrayToSort[index1] = first;
+				// Change indices accordingly.
 				index1--;
 				index2--;
 			}
@@ -50,15 +63,15 @@ public class AnagramUtil {
 	// array of words, in no particular order. It returns an empty array if
 	// there are no anagrams in the input array.
 	public static String[] getLargestAnagramGroup(String[] nameToBeChanged) {
-		
-		insertionSort(nameToBeChanged, new Comparator<String>(){
+
+		insertionSort(nameToBeChanged, new Comparator<String>() {
 
 			@Override
 			public int compare(String o1, String o2) {
 				// TODO Auto-generated method stub
 				return 0;
 			}
-			
+
 		});
 
 		// Placeholder.
