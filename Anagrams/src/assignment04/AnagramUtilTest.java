@@ -25,9 +25,9 @@ public class AnagramUtilTest {
 		String[] wordsToSort = new String[] { "cat", "bear" };
 		AnagramUtil.insertionSort(wordsToSort, new Comparator<String>() {
 			@Override
-			public int compare(String o1, String o2) {
+			public int compare(String right, String left) {
 				// Compare them lexographically in this case (by first letter).
-				return o1.charAt(0) - o2.charAt(0);
+				return right.compareTo(left);
 			}
 		});
 		assertArrayEquals(new String[] { "bear", "cat" }, wordsToSort);
@@ -36,9 +36,9 @@ public class AnagramUtilTest {
 		AnagramUtil.insertionSort(numsToSort, new Comparator<Integer>() {
 
 			@Override
-			public int compare(Integer o1, Integer o2) {
+			public int compare(Integer right, Integer left) {
 				// Compare them by simple integer value.
-				return o1 - o2;
+				return right - left;
 			}
 
 		});
@@ -48,9 +48,9 @@ public class AnagramUtilTest {
 		AnagramUtil.insertionSort(charsToSort, new Comparator<Character>() {
 
 			@Override
-			public int compare(Character o1, Character o2) {
+			public int compare(Character right, Character left) {
 				// Compare characters lexographically.
-				return o1 - o2;
+				return right.compareTo(left);
 			}
 
 		});
