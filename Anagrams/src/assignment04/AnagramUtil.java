@@ -15,11 +15,29 @@ public class AnagramUtil {
 
 	// This method returns the sorted version of the input string. The
 	// sorting must be accomplished using an insertion sort.
-	public static String sort(String nameToBeChanged) {
-		// Use insertionSort w/ array of chars.
+	public static String sort(String word) {
+		Character[] charsInWord = new Character[word.length()];
+		int index = 0;
+		for (Character character : word.toLowerCase().toCharArray()) {
+			charsInWord[index] = character;
+			index++;
+		}
 
-		// Placeholder.
-		return "";
+		AnagramUtil.insertionSort(charsInWord, new Comparator<Character>() {
+
+			@Override
+			public int compare(Character right, Character left) {
+				return right.compareTo(left);
+			}
+
+		});
+
+		String anagramRepresentation = "";
+		for (Character character : charsInWord) {
+			anagramRepresentation += character;
+		}
+
+		return anagramRepresentation;
 	}
 
 	/**
@@ -38,7 +56,8 @@ public class AnagramUtil {
 			// Store positions of indices to be modified later.
 			int index1 = index;
 			int index2 = index1 - 1;
-			// If the value is less than the one before it (in whatever way determined), switch places.
+			// If the value is less than the one before it (in whatever way
+			// determined), switch places.
 			while (index1 != 0 && comparator.compare(arrayToSort[index1], arrayToSort[index2]) < 0) {
 				// Switch values in index and its predecessor
 				T first = arrayToSort[index2];
