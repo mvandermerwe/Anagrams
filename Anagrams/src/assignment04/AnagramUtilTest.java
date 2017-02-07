@@ -59,6 +59,7 @@ public class AnagramUtilTest {
 	
 	@Test
 	public void testSort() {
+		//will set letters to lowercase and organize them alphabetically
 		String lettersToSort = "CaT";
 		lettersToSort = AnagramUtil.sort(lettersToSort);
 		assertEquals("act", lettersToSort);

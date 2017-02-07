@@ -13,8 +13,13 @@ import java.util.Comparator;
  */
 public class AnagramUtil {
 
-	// This method returns the sorted version of the input string. The
-	// sorting must be accomplished using an insertion sort.
+	/** 
+	 * This method returns the sorted version of the input string. The
+	 * sorting must be accomplished using an insertion sort.
+	 * 
+	 * @param word: word to have letters sorted
+	 * @return anagramRepresentation: the word with letters sorted
+	 */
 	public static String sort(String word) {
 		Character[] charsInWord = new Character[word.length()];
 		int index = 0;
@@ -70,15 +75,27 @@ public class AnagramUtil {
 		}
 	}
 
-	// This method returns true if the two input strings are anagrams of each
-	// other, otherwise returns false.
+	/**
+	 * This method returns true if the two input strings are anagrams of each
+	 * other, otherwise returns false.
+	 * 
+	 * @param wordOne: the first word to compare
+	 * @param wordTwo: the second word to compare with
+	 * 
+	 * @return the result of the two words are anagrams
+	 */
 	public static boolean areAnagrams(String wordOne, String wordTwo) {
 		return sort(wordOne).equals(sort(wordTwo));
 	}
 
-	// This method returns the largest group of anagrams in the input
-	// array of words, in no particular order. It returns an empty array if
-	// there are no anagrams in the input array.
+	/** 
+	 * This method returns the largest group of anagrams in the input
+	 * array of words, in no particular order. It returns an empty array if
+	 * there are no anagrams in the input array.
+	 * 
+	 * @param nameToBeChanged
+	 * @return 
+	 */
 	public static String[] getLargestAnagramGroup(String[] nameToBeChanged) {
 
 		insertionSort(nameToBeChanged, new Comparator<String>() {
@@ -99,12 +116,15 @@ public class AnagramUtil {
 		return new String[] { "" };
 	}
 
-	// Behaves the same as the previous method, but reads the list of
-	// words from the input filename. It is assumed that the file contains
-	// one word per line. If the file does not exist or is empty, the method
-	// returns an empty array because there are no anagrams.
+	/** Behaves the same as the previous method, but reads the list of
+	 * words from the input filename. It is assumed that the file contains
+	 * one word per line. If the file does not exist or is empty, the method
+	 * returns an empty array because there are no anagrams.
+	 * 
+	 * @param nameToBeChanged
+	 * @return
+	 */
 	public static String[] getLargestAnagramGroup(String nameToBeChanged) {
-
 		// Placeholder.
 		return new String[] { "" };
 	}
