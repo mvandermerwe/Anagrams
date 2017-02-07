@@ -84,9 +84,13 @@ public class AnagramUtil {
 		insertionSort(nameToBeChanged, new Comparator<String>() {
 
 			@Override
-			public int compare(String o1, String o2) {
-				// TODO Auto-generated method stub
-				return 0;
+			public int compare(String wordOne, String wordTwo) {
+				//sorts anagrams
+				if(areAnagrams(wordOne, wordTwo))
+				{
+					return 0;
+				}
+				return -1;
 			}
 
 		});

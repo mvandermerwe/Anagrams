@@ -56,5 +56,16 @@ public class AnagramUtilTest {
 		});
 		assertArrayEquals(new Character[] { 'c', 'd', 'e', 'y' }, charsToSort);
 	}
-
+	
+	@Test
+	public void testSort() {
+		String lettersToSort = "CaT";
+		lettersToSort = AnagramUtil.sort(lettersToSort);
+		assertEquals("act", lettersToSort);
+	}
+	
+	@Test
+	public void testAreAnagrams() {
+		assertEquals(true, AnagramUtil.areAnagrams("NagARam", "Anagram"));
+	}
 }
