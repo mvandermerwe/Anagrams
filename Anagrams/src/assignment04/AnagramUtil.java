@@ -72,10 +72,8 @@ public class AnagramUtil {
 
 	// This method returns true if the two input strings are anagrams of each
 	// other, otherwise returns false.
-	public static boolean areAnagrams(String nameToBeChanged, String nameToBeChanged2) {
-
-		// Placeholder.
-		return false;
+	public static boolean areAnagrams(String wordOne, String wordTwo) {
+		return sort(wordOne).equals(sort(wordTwo));
 	}
 
 	// This method returns the largest group of anagrams in the input
