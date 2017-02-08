@@ -3,7 +3,11 @@
  */
 package assignment04;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Scanner;
 
 /**
  * 
@@ -93,12 +97,12 @@ public class AnagramUtil {
 	 * array of words, in no particular order. It returns an empty array if
 	 * there are no anagrams in the input array.
 	 * 
-	 * @param nameToBeChanged
+	 * @param wordSet
 	 * @return 
 	 */
-	public static String[] getLargestAnagramGroup(String[] nameToBeChanged) {
+	public static String[] getLargestAnagramGroup(String[] wordSet) {
 
-		insertionSort(nameToBeChanged, new Comparator<String>() {
+		insertionSort(wordSet, new Comparator<String>() {
 
 			@Override
 			public int compare(String wordOne, String wordTwo) {
@@ -111,21 +115,58 @@ public class AnagramUtil {
 			}
 
 		});
+		
+		int low = 0;
+		int high = 0;
+		
+		int tempLow = 0;
+		int tempHigh = 0;
+		
+		for(int index = 0; index < wordSet.length; index++) {
+			if(areAnagrams(wordSet[index], wordSet[index+1])){
+				high++;
+			} else {
+				if((tempHigh-tempLow)>(high-low)){
+					low = tempLow;
+					high = tempHigh;
+				}
+			}
+		}
+		
+		String[] largestAnagramGroup = new String[high-low];
+		
+		for(int index = 0; index <= high-low; index++) {
+			largestAnagramGroup[index] = wordSet[low];
+			low++;
+		}
 
-		// Placeholder.
-		return new String[] { "" };
+		return largestAnagramGroup;
 	}
 
-	/** Behaves the same as the previous method, but reads the list of
+	/** 
+	 * Behaves the same as the previous method, but reads the list of
 	 * words from the input filename. It is assumed that the file contains
 	 * one word per line. If the file does not exist or is empty, the method
 	 * returns an empty array because there are no anagrams.
 	 * 
-	 * @param nameToBeChanged
+	 * @param fileName
 	 * @return
 	 */
-	public static String[] getLargestAnagramGroup(String nameToBeChanged) {
-		// Placeholder.
-		return new String[] { "" };
+	public static String[] getLargestAnagramGroup(String fileName) {
+		Scanner scanner = null;
+		
+		try {
+			scanner = new Scanner(new File("/" + fileName));
+		} catch (FileNotFoundException e) {
+			System.out.println("File " + fileName + " not found.");
+			System.exit(0);
+		}
+		
+		ArrayList<String> words = new ArrayList<>();
+		while(scanner.hasNext()) {
+			words.add(scanner.next());
+		}
+		
+		return AnagramUtil.getLargestAnagramGroup((String[]) words.toArray());
 	}
 }

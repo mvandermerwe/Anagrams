@@ -69,4 +69,10 @@ public class AnagramUtilTest {
 	public void testAreAnagrams() {
 		assertEquals(true, AnagramUtil.areAnagrams("NagARam", "Anagram"));
 	}
+	
+	public void testGetLargestAnagramGroup() {
+		String[] wordsToSort = new String[] {"cat", "bear", "act"};
+		String[] shouldReturn = new String[] {"cat","act"};
+		assertArrayEquals(shouldReturn, AnagramUtil.getLargestAnagramGroup(wordsToSort));
+	}
 }
