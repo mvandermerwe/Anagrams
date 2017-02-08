@@ -97,8 +97,8 @@ public class AnagramUtil {
 	 * array of words, in no particular order. It returns an empty array if
 	 * there are no anagrams in the input array.
 	 * 
-	 * @param wordSet
-	 * @return 
+	 * @param wordSet: set to find largest group of anagrams in
+	 * @return largestAnagramGroup: the largest group anagrams
 	 */
 	public static String[] getLargestAnagramGroup(String[] wordSet) {
 
@@ -122,20 +122,28 @@ public class AnagramUtil {
 		int tempLow = 0;
 		int tempHigh = 0;
 		
-		for(int index = 0; index < wordSet.length; index++) {
+		boolean startOver = true;
+		
+		for(int index = 0; index < wordSet.length-1; index++) {
 			if(areAnagrams(wordSet[index], wordSet[index+1])){
-				high++;
-			} else {
-				if((tempHigh-tempLow)>(high-low)){
-					low = tempLow;
-					high = tempHigh;
+				tempHigh = index + 1;
+				if(startOver)
+				{
+					tempLow = index;
+					startOver = false;
 				}
+			}
+			if((tempHigh-tempLow)>(high - low)) {
+				low = tempLow;
+				high = tempHigh;
+				startOver = true;
 			}
 		}
 		
-		String[] largestAnagramGroup = new String[high-low];
-		
-		for(int index = 0; index <= high-low; index++) {
+		String[] largestAnagramGroup = new String[high - low + 1];
+		int size = high - low + 1;
+		//
+		for(int index = 0; index < size; index++) {
 			largestAnagramGroup[index] = wordSet[low];
 			low++;
 		}
@@ -149,14 +157,14 @@ public class AnagramUtil {
 	 * one word per line. If the file does not exist or is empty, the method
 	 * returns an empty array because there are no anagrams.
 	 * 
-	 * @param fileName
-	 * @return
+	 * @param fileName: name of file with word set
+	 * @return largestAnagramGroup: the largest group anagrams
 	 */
 	public static String[] getLargestAnagramGroup(String fileName) {
 		Scanner scanner = null;
 		
 		try {
-			scanner = new Scanner(new File("/" + fileName));
+			scanner = new Scanner(new File("Resources/" + fileName));
 		} catch (FileNotFoundException e) {
 			System.out.println("File " + fileName + " not found.");
 			System.exit(0);
@@ -167,6 +175,11 @@ public class AnagramUtil {
 			words.add(scanner.next());
 		}
 		
-		return AnagramUtil.getLargestAnagramGroup((String[]) words.toArray());
+		String[] wordSet = new String[words.size()];
+		for(int index = 0; index < words.size(); index++) {
+			wordSet[index] = words.get(index);
+		}
+		
+		return AnagramUtil.getLargestAnagramGroup(wordSet);
 	}
 }

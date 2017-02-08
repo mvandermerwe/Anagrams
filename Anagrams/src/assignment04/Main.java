@@ -10,13 +10,15 @@ package assignment04;
  *
  */
 public class Main {
-
-	/**
-	 * @param args
-	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		AnagramUtil nagARam = new AnagramUtil();
+		
+		String[] wordList = {"cat", "bear", "tac", "act", "neat", "Nate"};
+		String[] anagrams = new String[wordList.length];
+		
+		anagrams = AnagramUtil.getLargestAnagramGroup(wordList);
+		for(int index = 0; index < anagrams.length; index++) {
+				System.out.println(anagrams[index]);
+		}
 	}
-
 }

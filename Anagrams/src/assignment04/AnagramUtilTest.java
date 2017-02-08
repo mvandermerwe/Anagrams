@@ -67,12 +67,23 @@ public class AnagramUtilTest {
 	
 	@Test
 	public void testAreAnagrams() {
+		//checks to see if all letters are the same between two strings
 		assertEquals(true, AnagramUtil.areAnagrams("NagARam", "Anagram"));
 	}
 	
+	@Test
 	public void testGetLargestAnagramGroup() {
+		//finds largest group of anagrams within a given string array
 		String[] wordsToSort = new String[] {"cat", "bear", "act"};
 		String[] shouldReturn = new String[] {"cat","act"};
 		assertArrayEquals(shouldReturn, AnagramUtil.getLargestAnagramGroup(wordsToSort));
+	}
+	
+	@Test
+	public void testGetLargestAnagramGroupFromFile() {
+		//finds largest group of anagrams within a file
+		String fileName = "test";
+		String[] shouldReturn = new String[] {"cat","act"};
+		assertArrayEquals(shouldReturn, AnagramUtil.getLargestAnagramGroup(fileName));
 	}
 }
