@@ -192,4 +192,63 @@ public class AnagramUtil {
 
 		return wordSet;
 	}
+	
+	/**
+	 * This method returns the largest group of anagrams in the input array of
+	 * words, in no particular order. It returns an empty array if there are no
+	 * anagrams in the input array.
+	 * 
+	 * @param wordSet:
+	 *            set to find largest group of anagrams in
+	 * @return largestAnagramGroup: the largest group anagrams
+	 */
+	public static String[] getLargestAnagramGroupArrayListSort(ArrayList<String> wordSet) {
+		if (wordSet.size() == 0) {
+			return new String[0];
+		}
+
+		wordSet.sort(new Comparator<String>(){
+			@Override
+			public int compare(String wordOne, String wordTwo) {
+				// sorts anagrams
+				if (areAnagrams(wordOne, wordTwo)) {
+					return 0;
+				}
+				return -1;
+			}
+		});
+
+		int low = 0;
+		int high = 0;
+
+		int tempLow = 0;
+		int tempHigh = 0;
+
+		boolean startOver = true;
+
+		for (int index = 0; index < wordSet.size() - 1; index++) {
+			if (areAnagrams(wordSet.get(index), wordSet.get(index+1))) {
+				tempHigh = index + 1;
+				if (startOver) {
+					tempLow = index;
+					startOver = false;
+				}
+			}
+			if ((tempHigh - tempLow) > (high - low)) {
+				low = tempLow;
+				high = tempHigh;
+				startOver = true;
+			}
+		}
+
+		String[] largestAnagramGroup = new String[high - low + 1];
+		int size = high - low + 1;
+		//
+		for (int index = 0; index < size; index++) {
+			largestAnagramGroup[index] = wordSet.get(low);
+			low++;
+		}
+
+		return largestAnagramGroup;
+	}
 }

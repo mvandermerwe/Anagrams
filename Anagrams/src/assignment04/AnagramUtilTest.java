@@ -5,6 +5,7 @@ package assignment04;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 
 import org.junit.Test;
@@ -77,6 +78,17 @@ public class AnagramUtilTest {
 		String[] wordsToSort = new String[] {"cat", "bear", "act"};
 		String[] shouldReturn = new String[] {"cat","act"};
 		assertArrayEquals(shouldReturn, AnagramUtil.getLargestAnagramGroup(wordsToSort));
+	}
+	
+	@Test
+	public void testGetLargestAnagramGroupArrayListSort() {
+		//finds largest group of anagrams within a given string arraylist
+		ArrayList<String> words = new ArrayList<>();
+		words.add("cat");
+		words.add("bear");
+		words.add("act");
+		String[] shouldReturn = new String[] {"cat","act"};
+		assertArrayEquals(shouldReturn, AnagramUtil.getLargestAnagramGroupArrayListSort(words));
 	}
 	
 	@Test
