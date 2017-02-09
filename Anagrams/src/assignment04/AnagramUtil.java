@@ -17,11 +17,12 @@ import java.util.Scanner;
  */
 public class AnagramUtil {
 
-	/** 
-	 * This method returns the sorted version of the input string. The
-	 * sorting must be accomplished using an insertion sort.
+	/**
+	 * This method returns the sorted version of the input string. The sorting
+	 * must be accomplished using an insertion sort.
 	 * 
-	 * @param word: word to have letters sorted
+	 * @param word:
+	 *            word to have letters sorted
 	 * @return anagramRepresentation: the word with letters sorted
 	 */
 	public static String sort(String word) {
@@ -83,8 +84,10 @@ public class AnagramUtil {
 	 * This method returns true if the two input strings are anagrams of each
 	 * other, otherwise returns false.
 	 * 
-	 * @param wordOne: the first word to compare
-	 * @param wordTwo: the second word to compare with
+	 * @param wordOne:
+	 *            the first word to compare
+	 * @param wordTwo:
+	 *            the second word to compare with
 	 * 
 	 * @return the result of the two words are anagrams
 	 */
@@ -92,16 +95,17 @@ public class AnagramUtil {
 		return sort(wordOne).equals(sort(wordTwo));
 	}
 
-	/** 
-	 * This method returns the largest group of anagrams in the input
-	 * array of words, in no particular order. It returns an empty array if
-	 * there are no anagrams in the input array.
+	/**
+	 * This method returns the largest group of anagrams in the input array of
+	 * words, in no particular order. It returns an empty array if there are no
+	 * anagrams in the input array.
 	 * 
-	 * @param wordSet: set to find largest group of anagrams in
+	 * @param wordSet:
+	 *            set to find largest group of anagrams in
 	 * @return largestAnagramGroup: the largest group anagrams
 	 */
 	public static String[] getLargestAnagramGroup(String[] wordSet) {
-		if(wordSet.length == 0) {
+		if (wordSet.length == 0) {
 			return new String[0];
 		}
 
@@ -109,44 +113,42 @@ public class AnagramUtil {
 
 			@Override
 			public int compare(String wordOne, String wordTwo) {
-				//sorts anagrams
-				if(areAnagrams(wordOne, wordTwo))
-				{
+				// sorts anagrams
+				if (areAnagrams(wordOne, wordTwo)) {
 					return 0;
 				}
 				return -1;
 			}
 
 		});
-		
+
 		int low = 0;
 		int high = 0;
-		
+
 		int tempLow = 0;
 		int tempHigh = 0;
-		
+
 		boolean startOver = true;
-		
-		for(int index = 0; index < wordSet.length-1; index++) {
-			if(areAnagrams(wordSet[index], wordSet[index+1])){
+
+		for (int index = 0; index < wordSet.length - 1; index++) {
+			if (areAnagrams(wordSet[index], wordSet[index + 1])) {
 				tempHigh = index + 1;
-				if(startOver)
-				{
+				if (startOver) {
 					tempLow = index;
 					startOver = false;
 				}
 			}
-			if((tempHigh-tempLow)>(high - low)) {
+			if ((tempHigh - tempLow) > (high - low)) {
 				low = tempLow;
 				high = tempHigh;
 				startOver = true;
 			}
 		}
-		
+
 		String[] largestAnagramGroup = new String[high - low + 1];
 		int size = high - low + 1;
 		//
-		for(int index = 0; index < size; index++) {
+		for (int index = 0; index < size; index++) {
 			largestAnagramGroup[index] = wordSet[low];
 			low++;
 		}
@@ -154,35 +156,40 @@ public class AnagramUtil {
 		return largestAnagramGroup;
 	}
 
-	/** 
-	 * Behaves the same as the previous method, but reads the list of
-	 * words from the input filename. It is assumed that the file contains
-	 * one word per line. If the file does not exist or is empty, the method
-	 * returns an empty array because there are no anagrams.
+	/**
+	 * Behaves the same as the previous method, but reads the list of words from
+	 * the input filename. It is assumed that the file contains one word per
+	 * line. If the file does not exist or is empty, the method returns an empty
+	 * array because there are no anagrams.
 	 * 
-	 * @param fileName: name of file with word set
+	 * @param fileName:
+	 *            name of file with word set
 	 * @return largestAnagramGroup: the largest group anagrams
 	 */
 	public static String[] getLargestAnagramGroup(String fileName) {
+		return AnagramUtil.getLargestAnagramGroup(AnagramUtil.getStringsFromFile(fileName));
+	}
+
+	public static String[] getStringsFromFile(String filename) {
 		Scanner scanner = null;
-		
+
 		try {
-			scanner = new Scanner(new File("Resources/" + fileName));
+			scanner = new Scanner(new File("Resources/" + filename));
 		} catch (FileNotFoundException e) {
-			System.out.println("File " + fileName + " not found.");
+			System.out.println("File " + filename + " not found.");
 			System.exit(0);
 		}
-		
+
 		ArrayList<String> words = new ArrayList<>();
-		while(scanner.hasNext()) {
+		while (scanner.hasNext()) {
 			words.add(scanner.next());
 		}
-		
+
 		String[] wordSet = new String[words.size()];
-		for(int index = 0; index < words.size(); index++) {
+		for (int index = 0; index < words.size(); index++) {
 			wordSet[index] = words.get(index);
 		}
-		
-		return AnagramUtil.getLargestAnagramGroup(wordSet);
+
+		return wordSet;
 	}
 }

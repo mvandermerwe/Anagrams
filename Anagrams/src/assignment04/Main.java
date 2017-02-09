@@ -3,7 +3,11 @@
  */
 package assignment04;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Random;
+import java.util.Scanner;
 
 /**
  * Main class for setting up and running our anagram algorithm.
@@ -32,6 +36,7 @@ public class Main {
 			}
 		}
 
+		/*
 		for (int wordLength = 0; wordLength < 132000; wordLength = 2 * wordLength + 1) {
 			long[] experimentResults = new long[numOfExperiments];
 
@@ -57,6 +62,32 @@ public class Main {
 				sum += experimentResults[index];
 			}
 			System.out.println(wordLength + " " + (sum / numOfExperiments));
+		}
+		*/
+		String[] words = AnagramUtil.getStringsFromFile("words_english");
+		
+		for (int wordSetLength = 0; wordSetLength < words.length; wordSetLength = 2 * wordSetLength + 1) {
+			long[] experimentResults = new long[numOfExperiments];
+
+			String[] wordsSet = new String[wordSetLength];
+			for(int index = 0; index < wordSetLength; index++){
+				wordsSet[index] = words[index];
+			}
+			
+			for (int numOfExperiment = 0; numOfExperiment < numOfExperiments; numOfExperiment++) {
+				
+				startTime = System.nanoTime();
+				AnagramUtil.getLargestAnagramGroup(wordsSet);
+				endTime = System.nanoTime();
+
+				experimentResults[numOfExperiment] = endTime - startTime;
+			}
+
+			long sum = 0;
+			for (int index = 0; index < numOfExperiments; index++) {
+				sum += experimentResults[index];
+			}
+			System.out.println(wordSetLength + " " + (sum / numOfExperiments));
 		}
 
 	}
