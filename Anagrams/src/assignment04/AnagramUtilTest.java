@@ -80,6 +80,12 @@ public class AnagramUtilTest {
 	}
 	
 	@Test
+	public void testGetLargestWithZeroArray() {
+		String[] empty = new String[0];
+		assertArrayEquals(empty, AnagramUtil.getLargestAnagramGroup(empty));
+	}
+	
+	@Test
 	public void testGetLargestAnagramGroupFromFile() {
 		//finds largest group of anagrams within a file
 		String fileName = "test";

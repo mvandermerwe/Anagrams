@@ -101,6 +101,9 @@ public class AnagramUtil {
 	 * @return largestAnagramGroup: the largest group anagrams
 	 */
 	public static String[] getLargestAnagramGroup(String[] wordSet) {
+		if(wordSet.length == 0) {
+			return new String[0];
+		}
 
 		insertionSort(wordSet, new Comparator<String>() {
 
