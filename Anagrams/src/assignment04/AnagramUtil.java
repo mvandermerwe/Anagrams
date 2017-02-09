@@ -211,10 +211,10 @@ public class AnagramUtil {
 			@Override
 			public int compare(String wordOne, String wordTwo) {
 				// sorts anagrams
-				if (areAnagrams(wordOne, wordTwo)) {
-					return 0;
+				if (areAnagrams(wordTwo, wordOne)) {
+					return 1;
 				}
-				return -1;
+				return 0;
 			}
 		});
 
@@ -245,7 +245,7 @@ public class AnagramUtil {
 		int size = high - low + 1;
 		//
 		for (int index = 0; index < size; index++) {
-			largestAnagramGroup[index] = wordSet.get(low);
+			largestAnagramGroup[index] = wordSet.get(index);
 			low++;
 		}
 

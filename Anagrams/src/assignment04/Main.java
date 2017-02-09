@@ -36,8 +36,7 @@ public class Main {
 				AnagramUtil.areAnagrams("thomas","mark");
 			}
 		}
-
-		/*
+/*
 		for (int wordLength = 0; wordLength < 132000; wordLength = 2 * wordLength + 1) {
 			long[] experimentResults = new long[numOfExperiments];
 
@@ -66,7 +65,7 @@ public class Main {
 		}
 		*/
 		String[] words = AnagramUtil.getStringsFromFile("words_english");
-		
+		/*
 		for (int wordSetLength = 0; wordSetLength < words.length; wordSetLength = 2 * wordSetLength + 1) {
 			long[] experimentResults = new long[numOfExperiments];
 
@@ -90,7 +89,7 @@ public class Main {
 			}
 			System.out.println(wordSetLength + " " + (sum / numOfExperiments));
 		}
-		
+		*/
 		for (int wordSetLength = 0; wordSetLength < words.length; wordSetLength = 2 * wordSetLength + 1) {
 			long[] experimentResults = new long[numOfExperiments];
 
