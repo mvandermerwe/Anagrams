@@ -128,21 +128,22 @@ public class AnagramUtil {
 		int tempLow = 0;
 		int tempHigh = 0;
 
-		boolean startOver = true;
-
 		for (int index = 0; index < wordSet.length - 1; index++) {
 			if (areAnagrams(wordSet[index], wordSet[index + 1])) {
 				tempHigh = index + 1;
-				if (startOver) {
-					tempLow = index;
-					startOver = false;
+			}else{
+				if((tempHigh - tempLow) > (high - low) || high == 0) {
+					low = tempLow;
+					high = tempHigh;
+					tempLow = index + 1;
+					tempHigh = index + 1;
 				}
 			}
-			if ((tempHigh - tempLow) > (high - low)) {
-				low = tempLow;
-				high = tempHigh;
-				startOver = true;
-			}
+		}
+		
+		if((tempHigh - tempLow) > (high - low)) {
+			low = tempLow;
+			high = tempHigh;
 		}
 
 		String[] largestAnagramGroup = new String[high - low + 1];
