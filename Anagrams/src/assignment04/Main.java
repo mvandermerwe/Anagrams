@@ -17,7 +17,7 @@ import java.util.Scanner;
  *
  */
 public class Main {
-	//runs methods of AnagramUtil class for analysis
+	// runs methods of AnagramUtil class for analysis
 	public static void main(String[] args) {
 		AnagramUtil nagARam = new AnagramUtil();
 		Random r = new Random();
@@ -27,22 +27,25 @@ public class Main {
 		long startTime;
 		long endTime;
 
-		//Warms up timer.
+		// Warms up timer.
 		startTime = System.nanoTime();
-		while (System.nanoTime() - startTime < 5_000_000_000.);
+		while (System.nanoTime() - startTime < 5_000_000_000.)
+			;
 
-		//Warms up areAnagrams (we think).
-		for (int dummy = 0; dummy < 3; dummy++) {
+		// Warms up areAnagrams (we think) - fixes some strange anomalies in
+		// test data
+		for (int dummy = 0; dummy < 100; dummy++) {
 			for (int numOfExperiment = 0; numOfExperiment < numOfExperiments; numOfExperiment++) {
-				AnagramUtil.areAnagrams("thomas","mark");
+				AnagramUtil.areAnagrams("thomas", "mark");
+				AnagramUtil.getLargestAnagramGroup("test");
 			}
 		}
-
-		//creates words of random length from 0 to 132000 while doubling from 1
-		for (int wordLength = 0; wordLength < 132000; wordLength = 2 * wordLength + 1) {
+/*
+		// creates words of random length from 0 to 20
+		for (int wordLength = 0; wordLength < 20; wordLength++) {
 			long[] experimentResults = new long[numOfExperiments];
-			
-			//runs test multiple time for average
+
+			// runs test multiple time for average
 			for (int numOfExperiment = 0; numOfExperiment < numOfExperiments; numOfExperiment++) {
 				String[] words = new String[2];
 				for (int word = 1; word < 3; word++) {
@@ -52,68 +55,69 @@ public class Main {
 					}
 					words[word - 1] = wordTemp;
 				}
-				
-				//starts timing of areAnagrams
+
+				// starts timing of areAnagrams
 				startTime = System.nanoTime();
 				AnagramUtil.areAnagrams(words[0], words[1]);
 				endTime = System.nanoTime();
 
-				//stores results from each test into an array
+				// stores results from each test into an array
 				experimentResults[numOfExperiment] = endTime - startTime;
 			}
-			
-			//gathers, calculates, and then prints average
+
+			// gathers, calculates, and then prints average
 			long sum = 0;
 			for (int index = 0; index < numOfExperiments; index++) {
 				sum += experimentResults[index];
 			}
 			System.out.println(wordLength + " " + (sum / numOfExperiments));
 		}
-
-		//takes in file to test
+*/
+		// takes in file to test
 		String[] words = AnagramUtil.getStringsFromFile("words_english");
-		
-		//takes specifically words from 0 until then end of the list while double from 1
+/*
+		// takes specifically words from 0 until then end of the list while
+		// double from 1
 		for (int wordSetLength = 0; wordSetLength < words.length; wordSetLength = 2 * wordSetLength + 1) {
 			long[] experimentResults = new long[numOfExperiments];
 
 			String[] wordsSet = new String[wordSetLength];
-			for(int index = 0; index < wordSetLength; index++){
+			for (int index = 0; index < wordSetLength; index++) {
 				wordsSet[index] = words[index];
 			}
-			
+
 			for (int numOfExperiment = 0; numOfExperiment < numOfExperiments; numOfExperiment++) {
-				//starts timing of getLargestAnagramGroup
+				// starts timing of getLargestAnagramGroup
 				startTime = System.nanoTime();
 				AnagramUtil.getLargestAnagramGroup(wordsSet);
 				endTime = System.nanoTime();
 
 				experimentResults[numOfExperiment] = endTime - startTime;
 			}
-			
-			//calculates averages and prints
+
+			// calculates averages and prints
 			long sum = 0;
 			for (int index = 0; index < numOfExperiments; index++) {
 				sum += experimentResults[index];
 			}
 			System.out.println(wordSetLength + " " + (sum / numOfExperiments));
 		}
-		
-		//Uses same word set from file above and same number of words
+*/
+		// Uses same word set from file above and same number of words
 		for (int wordSetLength = 0; wordSetLength < words.length; wordSetLength = 2 * wordSetLength + 1) {
 			long[] experimentResults = new long[numOfExperiments];
-			
-			//puts specific amoung of words from list into an array
+
+			// puts specific amoung of words from list into an array
 			String[] wordsSet = new String[wordSetLength];
-			for(int index = 0; index < wordSetLength; index++){
+			for (int index = 0; index < wordSetLength; index++) {
 				wordsSet[index] = words[index];
 			}
-			
+
 			for (int numOfExperiment = 0; numOfExperiment < numOfExperiments; numOfExperiment++) {
-				
-				//start timing for insertionSort
+
+				// start timing for insertionSort
 				startTime = System.nanoTime();
-				AnagramUtil.insertionSort(wordsSet, new Comparator<String>(){
+				AnagramUtil.insertionSort(wordsSet, new Comparator<String>() {
 					@Override
 					public int compare(String wordOne, String wordTwo) {
 						// sorts anagrams
@@ -128,7 +132,7 @@ public class Main {
 				experimentResults[numOfExperiment] = endTime - startTime;
 			}
 
-			//calculates and prints averages
+			// calculates and prints averages
 			long sum = 0;
 			for (int index = 0; index < numOfExperiments; index++) {
 				sum += experimentResults[index];
@@ -138,4 +142,3 @@ public class Main {
 
 	}
 }
-

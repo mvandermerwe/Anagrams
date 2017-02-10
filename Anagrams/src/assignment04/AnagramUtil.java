@@ -214,10 +214,7 @@ public class AnagramUtil {
 			@Override
 			public int compare(String wordOne, String wordTwo) {
 				// sorts anagrams
-				if (areAnagrams(wordTwo, wordOne)) {
-					return 1;
-				}
-				return 0;
+				return sort(wordOne).compareTo(sort(wordTwo));
 			}
 		});
 
@@ -227,28 +224,31 @@ public class AnagramUtil {
 		int tempLow = 0;
 		int tempHigh = 0;
 
-		boolean startOver = true;
-
+		// Go back through our array. Determine the indices of the largest set
+		// of Anagrams.
 		for (int index = 0; index < wordSet.size() - 1; index++) {
-			if (areAnagrams(wordSet.get(index), wordSet.get(index + 1))) {
+			if (areAnagrams(wordSet.get(index), wordSet.get(index+1))) {
 				tempHigh = index + 1;
-				if (startOver) {
-					tempLow = index;
-					startOver = false;
+			} else {
+				if ((tempHigh - tempLow) > (high - low) || high == 0) {
+					low = tempLow;
+					high = tempHigh;
+					tempLow = index + 1;
+					tempHigh = index + 1;
 				}
 			}
-			if ((tempHigh - tempLow) > (high - low)) {
-				low = tempLow;
-				high = tempHigh;
-				startOver = true;
-			}
+		}
+		// Checks if the last set of anagrams was largest.
+		if ((tempHigh - tempLow) > (high - low)) {
+			low = tempLow;
+			high = tempHigh;
 		}
 
 		String[] largestAnagramGroup = new String[high - low + 1];
 		int size = high - low + 1;
-		//
+		// Build up our STring containing the largest group of anagrams.
 		for (int index = 0; index < size; index++) {
-			largestAnagramGroup[index] = wordSet.get(index);
+			largestAnagramGroup[index] = wordSet.get(low);
 			low++;
 		}
 

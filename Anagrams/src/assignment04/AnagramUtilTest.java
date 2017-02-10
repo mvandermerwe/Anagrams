@@ -80,13 +80,16 @@ public class AnagramUtilTest {
 		assertArrayEquals(shouldReturn, AnagramUtil.getLargestAnagramGroup(wordsToSort));
 	}
 
+	@Test
 	public void testGetLargestAnagramGroupArrayListSort() {
 		// finds largest group of anagrams within a given string arraylist
 		ArrayList<String> words = new ArrayList<>();
 		words.add("cat");
 		words.add("bear");
 		words.add("act");
-		String[] shouldReturn = new String[] { "cat", "act" };
+		words.add("erba");
+		words.add("aber");
+		String[] shouldReturn = new String[] { "bear", "erba", "aber" };
 		assertArrayEquals(shouldReturn, AnagramUtil.getLargestAnagramGroupArrayListSort(words));
 	}
 
