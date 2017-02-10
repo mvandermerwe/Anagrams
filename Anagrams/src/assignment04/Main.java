@@ -40,8 +40,8 @@ public class Main {
 				AnagramUtil.getLargestAnagramGroup("test");
 			}
 		}
-/*
-		// creates words of random length from 0 to 20
+
+		//Tests areAnagrams for different word lengths.
 		for (int wordLength = 0; wordLength < 20; wordLength++) {
 			long[] experimentResults = new long[numOfExperiments];
 
@@ -72,12 +72,12 @@ public class Main {
 			}
 			System.out.println(wordLength + " " + (sum / numOfExperiments));
 		}
-*/
+
 		// takes in file to test
 		String[] words = AnagramUtil.getStringsFromFile("words_english");
-/*
+
 		// takes specifically words from 0 until then end of the list while
-		// double from 1
+		// double from 1 to test getLargestAnagram
 		for (int wordSetLength = 0; wordSetLength < words.length; wordSetLength = 2 * wordSetLength + 1) {
 			long[] experimentResults = new long[numOfExperiments];
 
@@ -102,7 +102,8 @@ public class Main {
 			}
 			System.out.println(wordSetLength + " " + (sum / numOfExperiments));
 		}
-*/
+
+		//Tests insertion sort alone.
 		// Uses same word set from file above and same number of words
 		for (int wordSetLength = 0; wordSetLength < words.length; wordSetLength = 2 * wordSetLength + 1) {
 			long[] experimentResults = new long[numOfExperiments];
@@ -139,6 +140,70 @@ public class Main {
 			}
 			System.out.println(wordSetLength + " " + (sum / numOfExperiments));
 		}
+		
+		//Tests get largest anagram using Arraylist's merge sort.
+		for (int wordSetLength = 0; wordSetLength < words.length; wordSetLength = 2 * wordSetLength + 1) {
+			long[] experimentResults = new long[numOfExperiments];
 
+			// puts specific amoung of words from list into an array
+			ArrayList<String> wordsSet = new ArrayList<String>();
+			for (int index = 0; index < wordSetLength; index++) {
+				wordsSet.add(index, words[index]);
+			}
+
+			for (int numOfExperiment = 0; numOfExperiment < numOfExperiments; numOfExperiment++) {
+
+				// start timing for insertionSort
+				startTime = System.nanoTime();
+				AnagramUtil.getLargestAnagramGroupArrayListSort(wordsSet);
+				endTime = System.nanoTime();
+
+				experimentResults[numOfExperiment] = endTime - startTime;
+			}
+
+			// calculates and prints averages
+			long sum = 0;
+			for (int index = 0; index < numOfExperiments; index++) {
+				sum += experimentResults[index];
+			}
+			System.out.println(wordSetLength + " " + (sum / numOfExperiments));
+		}
+		
+		for (int numsToTest = 0; numsToTest < words.length; numsToTest = 2 * numsToTest + 1) {
+			long[] experimentResults = new long[numOfExperiments];
+			
+			Random random = new Random();
+
+			// puts specific amoung of rand ints into an array
+			Integer[] numSet = new Integer[numsToTest];
+			for (int index = 0; index < numsToTest; index++) {
+				numSet[index] = random.nextInt(1000);
+			}
+
+			for (int numOfExperiment = 0; numOfExperiment < numOfExperiments; numOfExperiment++) {
+
+				// start timing for insertionSort
+				startTime = System.nanoTime();
+				AnagramUtil.insertionSort(numSet, new Comparator<Integer>() {
+
+					@Override
+					public int compare(Integer o1, Integer o2) {
+						return o1.compareTo(o2);
+					}
+					
+				});
+				endTime = System.nanoTime();
+
+				experimentResults[numOfExperiment] = endTime - startTime;
+			}
+
+			// calculates and prints averages
+			long sum = 0;
+			for (int index = 0; index < numOfExperiments; index++) {
+				sum += experimentResults[index];
+			}
+			System.out.println(numsToTest + " " + (sum / numOfExperiments));
+		}
+		
 	}
 }
